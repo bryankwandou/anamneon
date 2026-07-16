@@ -7,9 +7,9 @@ export const MEMO_PROGRAM_ID = new PublicKey(
   "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
 );
 
-// USDC-Dev mint on Solana devnet (6 decimals)
+// Circle USDC mint on Solana devnet (6 decimals)
 export const USDC_DEV_MINT = new PublicKey(
-  "Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr"
+  "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
 );
 
 // Treasury that receives issuance fees (devnet)

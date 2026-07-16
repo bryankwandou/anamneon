@@ -33,7 +33,7 @@ Data medis tidak pernah ditaruh mentah di blockchain — itu melanggar privasi d
 ## Fitur yang berjalan
 
 - Penerbitan entri riwayat dengan anchoring on-chain (Memo program, devnet)
-- Pembayaran biaya penerbitan: 0.001 SOL atau 0.01 USDC devnet (mint `Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr`)
+- Pembayaran biaya penerbitan: 0.001 SOL atau 0.01 USDC devnet (mint Circle `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`)
 - Timeline rekam jejak per wallet pasien dengan status verifikasi per entri
 - Verifikasi publik: recompute hash + cek transaksi devnet, lengkap dengan link explorer
 - Ringkasan anamnesis otomatis untuk dokter (Groq, llama-3.3-70b) dari riwayat yang sudah ter-anchor
@@ -72,6 +72,15 @@ Setelah deploy pertama, panggil `GET /api/db/init` sekali untuk membuat skema.
 1. Buka https://anamneon.vercel.app, hubungkan Phantom/Solflare (jaringan devnet, SOL dari https://faucet.solana.com).
 2. Buat satu entri di halaman Rekam Jejak, pilih bayar SOL atau USDC.
 3. Salin ID rekord, buka halaman Verifikasi, tempel — sistem menunjukkan hash yang dihitung ulang, status kecocokan database, status ditemukan di rantai, dan link transaksinya di explorer.solana.com (cluster devnet).
+
+## Bukti on-chain (devnet, bisa dicek siapa pun)
+
+| Alur | Transaksi |
+|---|---|
+| Anchor + fee SOL | [`Pe5dkskcWirCQqpp5xfD6jfMMdUJM2UhHyw2pQECLVdJffmXeK3oCuTpZn1zSJNux5EAnWizfDKRP65REJ2Kj2f`](https://explorer.solana.com/tx/Pe5dkskcWirCQqpp5xfD6jfMMdUJM2UhHyw2pQECLVdJffmXeK3oCuTpZn1zSJNux5EAnWizfDKRP65REJ2Kj2f?cluster=devnet) — slot 476642611 |
+| Anchor + fee USDC | [`3ssXWXFpLh9KJBiox8kdZGWdfkTEitrx9b3HSkTzZHjaJBeNFBtidmVZEkp34qgW5ixirQscStoLXexeoHMFbTax`](https://explorer.solana.com/tx/3ssXWXFpLh9KJBiox8kdZGWdfkTEitrx9b3HSkTzZHjaJBeNFBtidmVZEkp34qgW5ixirQscStoLXexeoHMFbTax?cluster=devnet) — slot 476642930 |
+
+Kedua transaksi membawa memo `ANAMNEON:v1:<sha256>` persis seperti yang dikirim aplikasi.
 
 ## Batasan yang jujur
 
