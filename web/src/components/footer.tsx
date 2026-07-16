@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./nav";
+import { Link001 } from "@/components/ui/skiper-ui/skiper40";
 
 export function Footer() {
   return (
@@ -16,22 +17,18 @@ export function Footer() {
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted">
           <Link href="/verify" className="hover:text-foreground">Verifikasi publik</Link>
-          <a
+          <Link001
             href="https://github.com/bryankwandou/anamneon"
-            target="_blank"
-            rel="noreferrer"
             className="hover:text-foreground"
           >
             GitHub
-          </a>
-          <a
+          </Link001>
+          <Link001
             href="https://explorer.solana.com/?cluster=devnet"
-            target="_blank"
-            rel="noreferrer"
             className="hover:text-foreground"
           >
             Solana Devnet
-          </a>
+          </Link001>
           <span>Ide: Denzel Joshua Yasin</span>
           <span>PIC: Vincentius Bryan Kwandou — SCC Unika Atma Jaya Makassar</span>
         </div>
