@@ -17,6 +17,8 @@ import {
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
 import { FadeUp } from "@/components/motion";
+import { useLang } from "@/lib/i18n";
+import { HOSPITALS } from "@/data/hospitals";
 import {
   MEMO_PROGRAM_ID,
   MEMO_PREFIX,
@@ -33,6 +35,7 @@ export default function RecordPage() {
   const { publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
   const router = useRouter();
+  const { t } = useLang();
 
   const [hubs, setHubs] = useState<Hub[]>([]);
   const [form, setForm] = useState({
@@ -152,11 +155,17 @@ export default function RecordPage() {
   return (
     <div className="mx-auto max-w-2xl px-5 py-14">
       <FadeUp>
-        <p className="text-xs uppercase tracking-widest text-accent">Entri baru</p>
-        <h1 className="font-display mt-2 text-3xl md:text-4xl">Catat satu kunjungan</h1>
+        <p className="text-xs uppercase tracking-widest text-accent">
+          {t("Entri baru", "New entry")}
+        </p>
+        <h1 className="font-display mt-2 text-3xl md:text-4xl">
+          {t("Catat satu kunjungan", "Record one visit")}
+        </h1>
         <p className="mt-3 text-sm text-muted">
-          Isinya dienkripsi sebelum disimpan. Yang naik ke Solana hanya sidik
-          jari SHA-256-nya, dibawa transaksi memo yang kamu tanda tangani sendiri.
+          {t(
+            "Isinya dienkripsi sebelum disimpan. Yang naik ke Solana hanya sidik jari SHA-256-nya, dibawa transaksi memo yang kamu tanda tangani sendiri.",
+            "The content is encrypted before storage. Only its SHA-256 fingerprint goes to Solana, carried by a memo transaction you sign yourself."
+          )}
         </p>
       </FadeUp>
 
@@ -185,7 +194,10 @@ export default function RecordPage() {
             />
             <datalist id="hubs">
               {hubs.map((h) => (
-                <option key={h.id} value={h.name}>{h.city}</option>
+                <option key={`hub-${h.id}`} value={h.name}>{h.city}</option>
+              ))}
+              {HOSPITALS.map((h) => (
+                <option key={h.name} value={h.name}>{h.city}</option>
               ))}
             </datalist>
           </Field>
@@ -284,10 +296,10 @@ export default function RecordPage() {
               className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-[#04211d] transition-opacity hover:opacity-85 disabled:opacity-50"
             >
               {step === "signing"
-                ? "Menunggu tanda tangan..."
+                ? t("Menunggu tanda tangan...", "Waiting for signature...")
                 : step === "confirming"
-                ? "Menunggu konfirmasi devnet..."
-                : "Enkripsi, bayar, dan kunci di Solana"}
+                ? t("Menunggu konfirmasi devnet...", "Waiting for devnet confirmation...")
+                : t("Enkripsi, bayar, dan kunci di Solana", "Encrypt, pay, and seal on Solana")}
             </button>
             <Link href="/app" className="text-sm text-muted hover:text-foreground">
               Batal

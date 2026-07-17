@@ -34,4 +34,32 @@ export async function initSchema() {
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
   )`;
   await sql`CREATE INDEX IF NOT EXISTS anamneon_records_wallet_idx ON anamneon_records (patient_wallet)`;
+  await sql`CREATE TABLE IF NOT EXISTS anamneon_users (
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'user',
+    accepted_terms_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  )`;
+  await sql`CREATE TABLE IF NOT EXISTS anamneon_sessions (
+    token TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES anamneon_users(id) ON DELETE CASCADE,
+    expires_at TIMESTAMPTZ NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  )`;
+  await sql`CREATE TABLE IF NOT EXISTS anamneon_patients (
+    id SERIAL PRIMARY KEY,
+    full_name TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    birth_date DATE NOT NULL,
+    city TEXT NOT NULL,
+    blood_type TEXT NOT NULL DEFAULT '',
+    insurance TEXT NOT NULL DEFAULT '',
+    insurance_no TEXT NOT NULL DEFAULT '',
+    dataset_source TEXT NOT NULL DEFAULT 'synthetic-demo',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  )`;
+  await sql`CREATE INDEX IF NOT EXISTS anamneon_patients_name_idx ON anamneon_patients (full_name)`;
 }

@@ -6,6 +6,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeUp, PulseLine } from "@/components/motion";
 import { explorerTx, shortAddr } from "@/lib/solana";
+import { useLang } from "@/lib/i18n";
 
 type Rec = {
   id: string;
@@ -21,6 +22,7 @@ type Rec = {
 
 export default function Dashboard() {
   const { publicKey } = useWallet();
+  const { t } = useLang();
   const [records, setRecords] = useState<Rec[]>([]);
   const [loading, setLoading] = useState(false);
   const [summary, setSummary] = useState("");
@@ -72,10 +74,14 @@ export default function Dashboard() {
     return (
       <div className="mx-auto max-w-3xl px-5 py-28 text-center">
         <PulseLine className="mx-auto mb-8 h-12 w-56 text-accent/60" />
-        <h1 className="font-display text-3xl md:text-4xl">Hubungkan wallet dulu</h1>
+        <h1 className="font-display text-3xl md:text-4xl">
+          {t("Hubungkan wallet dulu", "Connect a wallet first")}
+        </h1>
         <p className="mx-auto mt-4 max-w-md text-sm text-muted">
-          Rekam jejakmu terikat ke alamat wallet. Pakai Phantom atau Solflare di
-          jaringan devnet, lalu tombol di kanan atas.
+          {t(
+            "Rekam jejakmu terikat ke alamat wallet. Pakai Phantom atau Solflare di jaringan devnet, lalu tombol di kanan atas.",
+            "Your records are tied to a wallet address. Use Phantom or Solflare on devnet, then the button at the top right."
+          )}
         </p>
       </div>
     );
@@ -86,9 +92,11 @@ export default function Dashboard() {
       <FadeUp>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-widest text-accent">Rekam jejak</p>
+            <p className="text-xs uppercase tracking-widest text-accent">
+              {t("Rekam jejak", "Records")}
+            </p>
             <h1 className="font-display mt-2 text-3xl md:text-4xl">
-              Riwayat milik {shortAddr(publicKey.toBase58())}
+              {t("Riwayat milik", "History of")} {shortAddr(publicKey.toBase58())}
             </h1>
           </div>
           <div className="flex gap-3">
@@ -97,13 +105,15 @@ export default function Dashboard() {
               disabled={summarizing || records.length === 0}
               className="rounded-full border border-line bg-surface px-5 py-2.5 text-sm transition-colors hover:border-accent/50 disabled:opacity-40"
             >
-              {summarizing ? "Merangkum..." : "Ringkasan klinis"}
+              {summarizing
+                ? t("Merangkum...", "Summarizing...")
+                : t("Ringkasan klinis", "Clinical summary")}
             </button>
             <Link
               href="/app/record"
               className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-[#04211d] transition-opacity hover:opacity-85"
             >
-              Catat entri baru
+              {t("Catat entri baru", "New entry")}
             </Link>
           </div>
         </div>
@@ -141,8 +151,10 @@ export default function Dashboard() {
         ) : records.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-line p-12 text-center">
             <p className="text-sm text-muted">
-              Belum ada entri. Mulai dari tombol Catat entri baru di atas —
-              butuh sedikit SOL devnet dari faucet.solana.com.
+              {t(
+                "Belum ada entri. Mulai dari tombol Catat entri baru di atas — butuh sedikit SOL devnet dari faucet.solana.com.",
+                "No entries yet. Start from the New entry button above — you need a little devnet SOL from faucet.solana.com."
+              )}
             </p>
           </div>
         ) : (
@@ -171,7 +183,9 @@ export default function Dashboard() {
                           : "rounded-full bg-surface-2 px-3 py-1 text-xs text-muted"
                       }
                     >
-                      {r.status === "anchored" ? "Terkunci di rantai" : "Menunggu anchor"}
+                      {r.status === "anchored"
+                        ? t("Terkunci di rantai", "Sealed on-chain")
+                        : t("Menunggu anchor", "Awaiting anchor")}
                     </span>
                     {r.anchor_sig && (
                       <a

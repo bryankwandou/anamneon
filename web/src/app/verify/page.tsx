@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeUp, PulseLine } from "@/components/motion";
+import { useLang } from "@/lib/i18n";
 
 type Detail = {
   id: string;
@@ -21,6 +22,7 @@ type Detail = {
 };
 
 function VerifyInner() {
+  const { t } = useLang();
   const params = useSearchParams();
   const [id, setId] = useState(params.get("id") ?? "");
   const [busy, setBusy] = useState(false);
@@ -52,14 +54,17 @@ function VerifyInner() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-14">
       <FadeUp>
-        <p className="text-xs uppercase tracking-widest text-accent">Verifikasi publik</p>
+        <p className="text-xs uppercase tracking-widest text-accent">
+          {t("Verifikasi publik", "Public verification")}
+        </p>
         <h1 className="font-display mt-2 text-3xl md:text-4xl">
-          Buktikan sebuah riwayat itu asli.
+          {t("Buktikan sebuah riwayat itu asli.", "Prove a history is genuine.")}
         </h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-          Tempel ID rekord. Sistem menghitung ulang sidik jari dari isi
-          terenkripsi, lalu mencocokkannya dengan transaksi memo di Solana
-          devnet. Dua-duanya harus cocok — kalau tidak, rekord itu pernah diubah.
+          {t(
+            "Tempel ID rekord. Sistem menghitung ulang sidik jari dari isi terenkripsi, lalu mencocokkannya dengan transaksi memo di Solana devnet. Dua-duanya harus cocok — kalau tidak, rekord itu pernah diubah.",
+            "Paste a record ID. The system recomputes the fingerprint from the encrypted content, then matches it against the memo transaction on Solana devnet. Both must agree — otherwise the record has been altered."
+          )}
         </p>
       </FadeUp>
 
@@ -81,7 +86,7 @@ function VerifyInner() {
           disabled={busy}
           className="shrink-0 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#04211d] transition-opacity hover:opacity-85 disabled:opacity-50"
         >
-          {busy ? "Memeriksa..." : "Periksa"}
+          {busy ? t("Memeriksa...", "Checking...") : t("Periksa", "Check")}
         </button>
       </form>
 
@@ -116,25 +121,27 @@ function VerifyInner() {
                     : "font-display text-2xl text-danger"
                 }
               >
-                {result.verified ? "Asli dan belum pernah diubah" : "Tidak terverifikasi"}
+                {result.verified
+                  ? t("Asli dan belum pernah diubah", "Genuine and never altered")
+                  : t("Tidak terverifikasi", "Not verified")}
               </p>
             </div>
             <dl className="mt-6 space-y-3 text-sm">
-              <Row k="Diagnosa" v={result.detail.diagnosisLabel} />
-              <Row k="Fasilitas" v={result.detail.hubName || "-"} />
-              <Row k="Tanggal kunjungan" v={result.detail.visitDate?.slice(0, 10) || "-"} />
+              <Row k={t("Diagnosa", "Diagnosis")} v={result.detail.diagnosisLabel} />
+              <Row k={t("Fasilitas", "Facility")} v={result.detail.hubName || "-"} />
+              <Row k={t("Tanggal kunjungan", "Visit date")} v={result.detail.visitDate?.slice(0, 10) || "-"} />
               <Row
-                k="Sidik jari dihitung ulang"
+                k={t("Sidik jari dihitung ulang", "Recomputed fingerprint")}
                 v={result.detail.recomputedHash}
                 mono
               />
               <Row
-                k="Cocok dengan database"
-                v={result.detail.hashMatchesDb ? "ya" : "tidak"}
+                k={t("Cocok dengan database", "Matches database")}
+                v={result.detail.hashMatchesDb ? t("ya", "yes") : t("tidak", "no")}
               />
               <Row
-                k="Ditemukan di Solana devnet"
-                v={result.detail.onChain ? "ya" : "tidak"}
+                k={t("Ditemukan di Solana devnet", "Found on Solana devnet")}
+                v={result.detail.onChain ? t("ya", "yes") : t("tidak", "no")}
               />
               {result.detail.anchorSlot && (
                 <Row k="Slot" v={String(result.detail.anchorSlot)} mono />

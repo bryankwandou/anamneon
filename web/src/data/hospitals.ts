@@ -1,0 +1,132 @@
+// Direktori fasilitas kesehatan Indonesia — subset nyata dan bisa diverifikasi
+// dari daftar publik rumah sakit teregistrasi Kementerian Kesehatan (rsonline.kemkes.go.id).
+// Nasional tercatat 3.000+ rumah sakit dan 10.000+ puskesmas; daftar di bawah
+// adalah rumah sakit rujukan utama dan jaringan besar per provinsi.
+
+export type Hospital = { name: string; city: string; kind: "hospital" | "clinic" | "puskesmas" | "lab" };
+
+export const HOSPITALS: Hospital[] = [
+  // Rumah sakit vertikal Kemenkes / rujukan nasional
+  { name: "RSUPN Dr. Cipto Mangunkusumo", city: "Jakarta Pusat", kind: "hospital" },
+  { name: "RSUP Persahabatan", city: "Jakarta Timur", kind: "hospital" },
+  { name: "RSUP Fatmawati", city: "Jakarta Selatan", kind: "hospital" },
+  { name: "RSPAD Gatot Soebroto", city: "Jakarta Pusat", kind: "hospital" },
+  { name: "RS Jantung dan Pembuluh Darah Harapan Kita", city: "Jakarta Barat", kind: "hospital" },
+  { name: "RS Anak dan Bunda Harapan Kita", city: "Jakarta Barat", kind: "hospital" },
+  { name: "RS Kanker Dharmais", city: "Jakarta Barat", kind: "hospital" },
+  { name: "RSPI Prof. Dr. Sulianti Saroso", city: "Jakarta Utara", kind: "hospital" },
+  { name: "RSUP Dr. Hasan Sadikin", city: "Bandung", kind: "hospital" },
+  { name: "RSUP Dr. Kariadi", city: "Semarang", kind: "hospital" },
+  { name: "RSUP Dr. Sardjito", city: "Yogyakarta", kind: "hospital" },
+  { name: "RSUP Dr. Soeradji Tirtonegoro", city: "Klaten", kind: "hospital" },
+  { name: "RSUP Prof. Dr. I.G.N.G. Ngoerah (Sanglah)", city: "Denpasar", kind: "hospital" },
+  { name: "RSUP Dr. M. Djamil", city: "Padang", kind: "hospital" },
+  { name: "RSUP H. Adam Malik", city: "Medan", kind: "hospital" },
+  { name: "RSUP Dr. Mohammad Hoesin", city: "Palembang", kind: "hospital" },
+  { name: "RSUP Dr. Rivai Abdullah", city: "Palembang", kind: "hospital" },
+  { name: "RSUP Prof. Dr. R.D. Kandou", city: "Manado", kind: "hospital" },
+  { name: "RSUP Dr. Wahidin Sudirohusodo", city: "Makassar", kind: "hospital" },
+  { name: "RSUP Dr. Tadjuddin Chalid", city: "Makassar", kind: "hospital" },
+  { name: "RSUP Ratatotok Buyat", city: "Minahasa Tenggara", kind: "hospital" },
+  { name: "RSUP Dr. Johannes Leimena", city: "Ambon", kind: "hospital" },
+  { name: "RSUP Dr. Ben Mboi", city: "Kupang", kind: "hospital" },
+  { name: "RS Mata Cicendo", city: "Bandung", kind: "hospital" },
+  { name: "RS Paru Dr. M. Goenawan Partowidigdo", city: "Bogor", kind: "hospital" },
+  { name: "RS Ortopedi Prof. Dr. R. Soeharso", city: "Surakarta", kind: "hospital" },
+  { name: "RS Jiwa Dr. Soeharto Heerdjan", city: "Jakarta Barat", kind: "hospital" },
+
+  // RSUD provinsi / kota besar
+  { name: "RSUD Dr. Soetomo", city: "Surabaya", kind: "hospital" },
+  { name: "RSUD Dr. Saiful Anwar", city: "Malang", kind: "hospital" },
+  { name: "RSUD Dr. Moewardi", city: "Surakarta", kind: "hospital" },
+  { name: "RSUD Dr. Zainoel Abidin", city: "Banda Aceh", kind: "hospital" },
+  { name: "RSUD Arifin Achmad", city: "Pekanbaru", kind: "hospital" },
+  { name: "RSUD Raden Mattaher", city: "Jambi", kind: "hospital" },
+  { name: "RSUD Dr. M. Yunus", city: "Bengkulu", kind: "hospital" },
+  { name: "RSUD Dr. H. Abdul Moeloek", city: "Bandar Lampung", kind: "hospital" },
+  { name: "RSUD Tarakan", city: "Jakarta Pusat", kind: "hospital" },
+  { name: "RSUD Pasar Rebo", city: "Jakarta Timur", kind: "hospital" },
+  { name: "RSUD Koja", city: "Jakarta Utara", kind: "hospital" },
+  { name: "RSUD Al Ihsan", city: "Bandung", kind: "hospital" },
+  { name: "RSUD Prof. Dr. Margono Soekarjo", city: "Purwokerto", kind: "hospital" },
+  { name: "RSUD Tugurejo", city: "Semarang", kind: "hospital" },
+  { name: "RSUD Dr. Iskak", city: "Tulungagung", kind: "hospital" },
+  { name: "RSUD Sidoarjo", city: "Sidoarjo", kind: "hospital" },
+  { name: "RSUD Ulin", city: "Banjarmasin", kind: "hospital" },
+  { name: "RSUD Abdul Wahab Sjahranie", city: "Samarinda", kind: "hospital" },
+  { name: "RSUD Dr. Soedarso", city: "Pontianak", kind: "hospital" },
+  { name: "RSUD Dr. Doris Sylvanus", city: "Palangka Raya", kind: "hospital" },
+  { name: "RSUD Tarakan Kalimantan Utara", city: "Tarakan", kind: "hospital" },
+  { name: "RSUD Labuang Baji", city: "Makassar", kind: "hospital" },
+  { name: "RSUD Kota Makassar (Daya)", city: "Makassar", kind: "hospital" },
+  { name: "RS Khusus Daerah Dadi", city: "Makassar", kind: "hospital" },
+  { name: "RSUD Undata", city: "Palu", kind: "hospital" },
+  { name: "RSUD Bahteramas", city: "Kendari", kind: "hospital" },
+  { name: "RSUD Prof. Dr. H. Aloei Saboe", city: "Gorontalo", kind: "hospital" },
+  { name: "RSUD Dr. M. Haulussy", city: "Ambon", kind: "hospital" },
+  { name: "RSUD Jayapura", city: "Jayapura", kind: "hospital" },
+  { name: "RSUD Manokwari", city: "Manokwari", kind: "hospital" },
+  { name: "RSUD Dr. T.C. Hillers", city: "Maumere", kind: "hospital" },
+  { name: "RSUD Sanjiwani", city: "Gianyar", kind: "hospital" },
+  { name: "RSUD Kota Mataram", city: "Mataram", kind: "hospital" },
+  { name: "RSUD Provinsi NTB", city: "Mataram", kind: "hospital" },
+
+  // Rumah sakit universitas
+  { name: "RS Universitas Indonesia", city: "Depok", kind: "hospital" },
+  { name: "RS Universitas Airlangga", city: "Surabaya", kind: "hospital" },
+  { name: "RS Akademik UGM", city: "Yogyakarta", kind: "hospital" },
+  { name: "RS Universitas Hasanuddin", city: "Makassar", kind: "hospital" },
+  { name: "RS Pendidikan Universitas Padjadjaran", city: "Bandung", kind: "hospital" },
+
+  // Jaringan swasta besar (perwakilan kota utama)
+  { name: "RS Siloam Kebon Jeruk", city: "Jakarta Barat", kind: "hospital" },
+  { name: "RS Siloam Lippo Village", city: "Tangerang", kind: "hospital" },
+  { name: "RS Siloam Surabaya", city: "Surabaya", kind: "hospital" },
+  { name: "RS Siloam Makassar", city: "Makassar", kind: "hospital" },
+  { name: "RS Pondok Indah", city: "Jakarta Selatan", kind: "hospital" },
+  { name: "RS Pondok Indah Bintaro Jaya", city: "Tangerang Selatan", kind: "hospital" },
+  { name: "Mayapada Hospital Jakarta Selatan", city: "Jakarta Selatan", kind: "hospital" },
+  { name: "Mayapada Hospital Tangerang", city: "Tangerang", kind: "hospital" },
+  { name: "RS Mitra Keluarga Kelapa Gading", city: "Jakarta Utara", kind: "hospital" },
+  { name: "RS Mitra Keluarga Surabaya", city: "Surabaya", kind: "hospital" },
+  { name: "RS Hermina Kemayoran", city: "Jakarta Pusat", kind: "hospital" },
+  { name: "RS Hermina Makassar", city: "Makassar", kind: "hospital" },
+  { name: "Eka Hospital BSD", city: "Tangerang Selatan", kind: "hospital" },
+  { name: "Primaya Hospital Bekasi Barat", city: "Bekasi", kind: "hospital" },
+  { name: "Primaya Hospital Makassar", city: "Makassar", kind: "hospital" },
+  { name: "RS Santosa Bandung Central", city: "Bandung", kind: "hospital" },
+  { name: "RS Advent Bandung", city: "Bandung", kind: "hospital" },
+  { name: "RS Panti Rapih", city: "Yogyakarta", kind: "hospital" },
+  { name: "RS Bethesda", city: "Yogyakarta", kind: "hospital" },
+  { name: "RS St. Carolus", city: "Jakarta Pusat", kind: "hospital" },
+  { name: "RS Premier Bintaro", city: "Tangerang Selatan", kind: "hospital" },
+  { name: "RS Awal Bros Pekanbaru", city: "Pekanbaru", kind: "hospital" },
+  { name: "RS Columbia Asia Medan", city: "Medan", kind: "hospital" },
+  { name: "RS Murni Teguh Memorial", city: "Medan", kind: "hospital" },
+  { name: "RS Stella Maris", city: "Makassar", kind: "hospital" },
+  { name: "RS Awal Bros Makassar", city: "Makassar", kind: "hospital" },
+  { name: "RS Ibnu Sina YW-UMI", city: "Makassar", kind: "hospital" },
+  { name: "RS Akademis Jaury Jusuf Putera", city: "Makassar", kind: "hospital" },
+  { name: "RS Grestelina", city: "Makassar", kind: "hospital" },
+  { name: "BaliMed Hospital", city: "Denpasar", kind: "hospital" },
+  { name: "RS BIMC Kuta", city: "Badung", kind: "hospital" },
+
+  // Laboratorium jaringan nasional
+  { name: "Laboratorium Klinik Prodia", city: "Jakarta Pusat", kind: "lab" },
+  { name: "Laboratorium Klinik Prodia Makassar", city: "Makassar", kind: "lab" },
+  { name: "Laboratorium Klinik Kimia Farma", city: "Jakarta Pusat", kind: "lab" },
+  { name: "Laboratorium Klinik Pramita", city: "Surabaya", kind: "lab" },
+  { name: "Laboratorium Klinik Cito", city: "Semarang", kind: "lab" },
+
+  // Puskesmas contoh (Makassar, kota basis tim)
+  { name: "Puskesmas Tamalanrea", city: "Makassar", kind: "puskesmas" },
+  { name: "Puskesmas Antang", city: "Makassar", kind: "puskesmas" },
+  { name: "Puskesmas Kassi-Kassi", city: "Makassar", kind: "puskesmas" },
+  { name: "Puskesmas Batua", city: "Makassar", kind: "puskesmas" },
+  { name: "Puskesmas Mamajang", city: "Makassar", kind: "puskesmas" },
+];
+
+export const DIRECTORY_NOTE_ID =
+  "Direktori diambil dari daftar publik rumah sakit teregistrasi Kemenkes (rsonline.kemkes.go.id) — subset rujukan utama dari 3.000+ RS dan 10.000+ puskesmas nasional. Fasilitas di luar daftar tetap bisa didaftarkan lewat konsol operator.";
+export const DIRECTORY_NOTE_EN =
+  "Directory sourced from the public registry of licensed hospitals by the Indonesian Ministry of Health (rsonline.kemkes.go.id) — a subset of major referral centers out of 3,000+ hospitals and 10,000+ community health centers nationwide. Facilities outside this list can still be registered through the operator console.";

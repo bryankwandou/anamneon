@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/lib/i18n";
 
 const WalletButton = dynamic(
   () =>
@@ -14,15 +15,19 @@ const WalletButton = dynamic(
   { ssr: false }
 );
 
-const links = [
-  { href: "/app", label: "Rekam Jejak" },
-  { href: "/verify", label: "Verifikasi" },
-  { href: "/operator", label: "Operator" },
-  { href: "/about", label: "Tentang" },
-];
-
 export function Nav() {
   const pathname = usePathname();
+  const { lang, setLang, t } = useLang();
+
+  const links = [
+    { href: "/app", label: t("Rekam Jejak", "Records") },
+    { href: "/demo", label: t("Demo", "Demo") },
+    { href: "/verify", label: t("Verifikasi", "Verify") },
+    { href: "/patients", label: t("Pasien", "Patients") },
+    { href: "/operator", label: t("Operator", "Operator") },
+    { href: "/about", label: t("Tentang", "About") },
+  ];
+
   return (
     <motion.header
       initial={{ y: -60, opacity: 0 }}
@@ -30,11 +35,11 @@ export function Nav() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="sticky top-0 z-50 border-b border-line bg-background/80 backdrop-blur-md"
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5">
         <Link href="/" className="flex items-center gap-2.5">
           <Logo />
           <span className="font-display text-lg tracking-tight">Anamneon</span>
-          <span className="rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted">
+          <span className="hidden rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted sm:inline">
             devnet
           </span>
         </Link>
@@ -52,7 +57,23 @@ export function Nav() {
             </Link>
           ))}
         </nav>
-        <WalletButton />
+        <div className="flex items-center gap-3">
+          <div className="flex rounded-full border border-line bg-surface p-0.5 text-xs">
+            {(["id", "en"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={cn(
+                  "rounded-full px-2.5 py-1 uppercase tracking-wide transition-colors",
+                  lang === l ? "bg-accent text-[#04211d] font-semibold" : "text-muted hover:text-foreground"
+                )}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+          <WalletButton />
+        </div>
       </div>
     </motion.header>
   );
